@@ -1,0 +1,11 @@
+<svrunit setupTime="12">
+
+    <testsuites>
+
+        <testsuite name="Docker Image with PHP 8.1" dockerImage="sfugos/php:8.1" dockerCommandRunner="true">
+            <directory>./specs</directory>
+        </testsuite>
+
+    </testsuites>
+
+</svrunit>

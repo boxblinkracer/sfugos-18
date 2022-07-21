@@ -1,0 +1,27 @@
+# Tag: {{ orca.tag }}
+# Copyright 2022 Christian Dangl
+#
+FROM {{ base_image }}
+LABEL title="SFUGOS {{ orca.image }}:{{ orca.tag }}"
+
+
+
+## ***********************************************************************
+##  BASE REQUIREMENTS
+## ***********************************************************************
+RUN apt-get update \
+    && apt-get install -y tzdata \
+    && dpkg-reconfigure --frontend noninteractive tzdata  \
+    && apt-get install -y software-properties-common \
+    {% block base %}
+    && apt-get install -y wget \
+    && apt-get install -y curl \
+    {% endblock %}
+    && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
+
+
+{% block php %}
+{% endblock %}
+
+
+ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]
